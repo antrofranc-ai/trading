@@ -17,8 +17,11 @@ if __name__ == "__main__":
 	res = requests.get('https://zerodha.com/margin-calculator/Equity/').text
 	soup = BeautifulSoup(res, 'html.parser')
 	#try:
-	stock = sys.argv[1]
+	if sys.argv[1]:
+		stock = sys.argv[1]
 	#except IndexError:
 	#	print(Usage)		
 	#print(sys.argv[1])
-	margin(stock)
+		margin(stock)
+	else:
+		
