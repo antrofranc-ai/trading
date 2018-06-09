@@ -17,7 +17,7 @@ for headings in heading:
     html +="<th>{}</th>".format(headings)
 html +="</tr>"
 for i in soup.tbody.contents:
-    if i.contents[9].text == 'OPEN=HIGH' or i.contents[9].text == 'OPEN=LOW':
+    if i.contents[9].text == 'OPEN=HIGH' or i.contents[9].text == 'OPEN=LOW' or i.contents[1].text == 'NIFTY' or i.contents[1].text == 'BANKNIFTY':
         content = [i.contents[j].text for j in {1,7,9,5}]
         stock=content[0]
         st=stock+':EQ'
