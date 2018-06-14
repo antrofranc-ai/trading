@@ -11,11 +11,12 @@ soup = BeautifulSoup(res, 'html.parser')
 soup2= BeautifulSoup(res2, 'html.parser')
 heading = [soup.tbody.tr.contents[j].text for j in {1,7,9,5}]
 heading.append('ZERODHA')
-html = """<html><table border="1">
+html = """<html><table class="sortable" border="1">
+	    <thead>
             <tr>"""
 for headings in heading:
     html +="<th>{}</th>".format(headings)
-html +="</tr>"
+html +="</tr></thead>"
 for i in soup.tbody.contents:
     if i.contents[9].text == 'OPEN=HIGH' or i.contents[9].text == 'OPEN=LOW' or i.contents[1].text == 'NIFTY' or i.contents[1].text == 'BANKNIFTY':
         content = [i.contents[j].text for j in {1,7,9,5}]
