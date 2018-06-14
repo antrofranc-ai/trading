@@ -4,6 +4,7 @@ import requests
 import texttable as tt
 import smtplib
 import email.message
+import operator
 from bs4 import BeautifulSoup
 res = requests.get('https://docs.google.com/spreadsheets/d/1rBV78LxZcu2J2L5rCEaBPAujnY4NJEbxLMqsfQXxh0g/pubhtml/sheet?headers=false&gid=0').text
 res2 = requests.get('https://zerodha.com/margin-calculator/Equity/').text
@@ -12,24 +13,28 @@ soup2= BeautifulSoup(res2, 'html.parser')
 heading = [soup.tbody.tr.contents[j].text for j in {1,7,9,5}]
 heading.append('ZERODHA')
 html = """<html><table class="sortable" border="1">
-	    <thead>
+           <thead>
             <tr>"""
 for headings in heading:
     html +="<th>{}</th>".format(headings)
-html +="</tr></thead>"
+html +="</tr></thead><tbody>"
+tab_conts=[]
 for i in soup.tbody.contents:
     if i.contents[9].text == 'OPEN=HIGH' or i.contents[9].text == 'OPEN=LOW' or i.contents[1].text == 'NIFTY' or i.contents[1].text == 'BANKNIFTY':
-        content = [i.contents[j].text for j in {1,7,9,5}]
-        stock=content[0]
+        contents = [i.contents[j].text for j in {1,7,9,5}]
+        stock=contents[0]
         st=stock+':EQ'
         for row in soup2.tbody.findAll('tr'):
             for td in row.findAll('td'):
                 if td.text == st:
-                    content.append(td.findNext(attrs='mis').text.strip())
-        html +="<tr>"
-        for conts in content:
-            html +="<td>{}</td>".format(conts)
-        html +="</tr>"
+                    contents.append(td.findNext(attrs='mis').text.strip())
+        tab_conts.append(contents)
+tabnew = sorted(tab_conts, key=operator.itemgetter(3))
+for row in tabnew:
+    html +="<tr>"
+    for item in row:
+        html +="<td>{}</td>".format(item)
+    html +="<tr>"
 html += "</table></html>"
 msg = email.message.Message()
 msg['Subject'] = 'OHL'
