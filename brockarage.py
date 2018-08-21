@@ -27,7 +27,7 @@ change.send_keys(NUMBER_OF_STOCKS)
 data = browser.page_source
 browser.close()
 soup_zerodha_brokerage = BeautifulSoup(data, "html.parser")
-if int(soup_zerodha_brokerage.find("span", {"class": "six columns profit"}).text) == 0:
+if float(soup_zerodha_brokerage.find("span", {"class": "six columns profit"}).text) == 0:
     print(soup_zerodha_brokerage.find("span", {"class": "six columns loss"}).text)
 else:
     print(soup_zerodha_brokerage.find("span", {"class": "six columns profit"}).text)
