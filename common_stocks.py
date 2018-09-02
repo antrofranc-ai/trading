@@ -41,6 +41,8 @@ gainers_losers = gainers + losers
 fno_gainers_fno_losers = fno_gainers + fno_losers
 set_1, set_2, set_3, set_4 = set(gainers_losers), set(fno_gainers_fno_losers), set(volume_gainers), set(oi_spurts)
 common_cash_fno_vol_oi = list(set_1 & set_2 & set_3 & set_4)
+set_11, set_22, set_33 = set(gainers_losers), set(fno_gainers_fno_losers), set(volume_gainers)
+common_cash_fno_vol = list(set_11 & set_22 & set_33)
 common_cash_fno = list(set(gainers_losers).intersection(fno_gainers_fno_losers))
 common_cash_volume_gainers = list(set(gainers_losers).intersection(volume_gainers))
 common_cash_oi_spurts = list(set(gainers_losers).intersection(oi_spurts))
@@ -51,6 +53,10 @@ common_losers_fno_losers = list(set(losers).intersection(fno_losers))
 print("CASH & FnO & VOL & OI")
 print("{}".format("=" * 6))
 for stock in common_cash_fno_vol_oi:
+    print(stock)
+print("\n----------\n")
+print("CASH & FnO & VOL")
+for stock in common_cash_fno_vol:
     print(stock)
 print("\n----------\n")
 print("CASH & FnO")
