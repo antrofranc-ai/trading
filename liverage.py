@@ -23,6 +23,6 @@ if __name__ == "__main__":
 	res = requests.get('https://zerodha.com/margin-calculator/Equity/').text
 	soup = BeautifulSoup(res, 'html.parser')
 	stock = sys.argv[1]
-	stock_price = int(sys.argv[2])
+	stock_price = float(sys.argv[2])
 	#print(sys.argv[1])
 	margin(stock, stock_price)
