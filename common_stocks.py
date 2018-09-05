@@ -93,22 +93,22 @@ common_losers_fno_losers = list(set(losers).intersection(fno_losers))
 #print("{}".format("=" * 6))
 #for stock in common_cash_oi_spurts:
 #    print(stock)
-#print("\n----------\n")
-#print("FnO & VOL")
-#print("{}".format("=" * 6))
-#for stock in common_fno_gainers_fno_losers_vol:
-#    print(stock)
-#print("\n----------\n")
+print("\n----------\n")
+print("FnO & VOL")
+print("{}".format("=" * 6))
+for stock in common_fno_gainers_fno_losers_vol:
+    print(stock)
+print("\n----------\n")
 #print("FnO & IO")
 #print("{}".format("=" * 6))
 #for stock in common_fno_gainers_fno_losers_oi:
 #    print(stock)
-print("\n----------\n")
-print("VOL & OI")
-print("{}".format("=" * 6))
-for stock in common_vol_oi:
-    print(stock)
-print("\n----------\n")
+#print("\n----------\n")
+#print("VOL & OI")
+#print("{}".format("=" * 6))
+#for stock in common_vol_oi:
+#    print(stock)
+#print("\n----------\n")
 #print("CASH & FnO")
 #print("{}".format("=" * 6))
 #for stock in common_cash_fno:
@@ -124,8 +124,11 @@ print("\n----------\n")
 #for stock in common_losers_fno_losers:
 #    print(stock)
 #print("\n----------\n")
-
-df = pd.DataFrame([common_cash_fno_vol_oi, common_cash_fno_vol, common_cash_fno_oi, common_cash_volume_gainers, common_cash_oi_spurts, common_fno_gainers_fno_losers_vol, common_fno_gainers_fno_losers_oi, common_cash_fno, common_gainers_fno_gainers, common_losers_fno_losers]).transpose()
-df.columns = ["CASH-FnO-VOL-OI |", "CASH-FnO-VOL |", "CASH-FnO-OI |", "CASH-VOL |", "CASH-OI |", "FnO-VOL |", "FnO-IO |", "CASH-FnO |", "G-CASH-FnO", "L-CASH-FnO"]
+#pd.set_option('display.height', 1000)
+pd.set_option('display.max_rows', 500)
+pd.set_option('display.max_columns', 500)
+pd.set_option('display.width', 1000)
+df = pd.DataFrame([common_cash_fno_vol_oi, common_cash_fno_vol, common_cash_fno_oi, common_cash_volume_gainers, common_cash_oi_spurts, common_fno_gainers_fno_losers_oi, common_vol_oi, common_cash_fno, common_gainers_fno_gainers, common_losers_fno_losers]).transpose()
+df.columns = ["CASH-FnO-VOL-OI |", "CASH-FnO-VOL |", "CASH-FnO-OI |", "CASH-VOL |", "CASH-OI |", "FnO-IO |","VOL & OI", "CASH-FnO |", "G-CASH-FnO", "L-CASH-FnO"]
 df=df.fillna(value='')
 print(df)
