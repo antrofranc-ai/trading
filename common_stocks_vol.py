@@ -7,7 +7,7 @@ data_nif50 = json.loads(resp_nif50.text)
 nif50=[]
 for stock in data_nif50['data']:
     nif50.append(stock['symbol'])
-url_nif_next50 = 'https://www.nseindia.com/live_market/dynaContent/live_watch/stock_watch/niftyStockWatch.json'
+url_nif_next50 = 'https://www.nseindia.com/live_market/dynaContent/live_watch/stock_watch/juniorNiftyStockWatch.json'
 resp_nif_next50 = requests.get(url_nif_next50)
 data_nif_next50 = json.loads(resp_nif_next50.text)
 nif_next50=[]
@@ -18,6 +18,8 @@ url_volume_gainers = "https://www.nseindia.com/live_market/dynaContent/live_anal
 resp_volume_gainers = requests.get(url_volume_gainers)
 data_volume_gainers = json.loads(resp_volume_gainers.text)
 volume_gainers=[] 
+for stock in data_volume_gainers['data']:
+    volume_gainers.append(stock['sym'])
 common_stocks_vol = list(set(stocks).intersection(volume_gainers))
 for stock in common_stocks_vol:
     print(stock)
