@@ -2,6 +2,7 @@
 
 from bs4 import BeautifulSoup
 import requests
+from tabulate import tabulate
 url_moneycontrol = 'https://m.moneycontrol.com/sensex.php?index=2&id=4'
 res_moneycontrol = requests.get(url_moneycontrol).text
 soup_moneycontrol = BeautifulSoup(res_moneycontrol, 'html.parser')
